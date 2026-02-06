@@ -461,6 +461,285 @@
                         </button>
                     </div>
                 ),
+                3: (
+                    <div className="space-y-8">
+                        <div className="info-box bg-blue-50 border-blue-500">
+                            <p className="text-blue-900 font-medium">🛠️ Select your skills</p>
+                        </div>
+                        <div className="card">
+                            <h3 className="font-black mb-4">Technical Skills</h3>
+                            <div className="grid grid-cols-2 gap-4">
+                                {['Microsoft Word', 'PowerPoint', 'Excel', 'Teams/Zoom', 'Typing', 'Social Media'].map(skill => (
+                                    <label key={skill} style={{display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem', background: '#f8fafc', borderRadius: '0.5rem', cursor: 'pointer'}}>
+                                        <input type="checkbox" checked={technicalSkills.includes(skill)} onChange={() => {
+                                            if (technicalSkills.includes(skill)) setTechnicalSkills(technicalSkills.filter(s => s !== skill));
+                                            else setTechnicalSkills([...technicalSkills, skill]);
+                                        }} />
+                                        <span>{skill}</span>
+                                    </label>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="card">
+                            <h3 className="font-black mb-4">Soft Skills</h3>
+                            <div className="grid grid-cols-2 gap-4">
+                                {['Communication', 'Teamwork', 'Problem Solving', 'Time Management', 'Customer Service', 'Active Listening'].map(skill => (
+                                    <label key={skill} style={{display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem', background: '#f8fafc', borderRadius: '0.5rem', cursor: 'pointer'}}>
+                                        <input type="checkbox" checked={softSkills.includes(skill)} onChange={() => {
+                                            if (softSkills.includes(skill)) setSoftSkills(softSkills.filter(s => s !== skill));
+                                            else setSoftSkills([...softSkills, skill]);
+                                        }} />
+                                        <span>{skill}</span>
+                                    </label>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                ),
+                4: (
+                    <div className="space-y-8">
+                        <div className="info-box bg-purple-50 border-purple-500">
+                            <p className="text-purple-900 font-medium">💼 Work experience</p>
+                        </div>
+                        {workExperience.map((exp, idx) => (
+                            <div key={idx} className="card relative">
+                                {workExperience.length > 1 && (
+                                    <button onClick={() => setWorkExperience(workExperience.filter((_, i) => i !== idx))} className="btn btn-delete absolute top-4 right-4">
+                                        <Trash2 className="w-5 h-5" />
+                                    </button>
+                                )}
+                                <h4 className="font-bold mb-4">Work #{idx + 1}</h4>
+                                <div className="grid grid-cols-2 gap-6">
+                                    <div>
+                                        <label className="text-sm font-bold mb-2" style={{display: 'block'}}>Role</label>
+                                        <input type="text" value={exp.role} onChange={(e) => {
+                                            const n = [...workExperience];
+                                            n[idx].role = e.target.value;
+                                            setWorkExperience(n);
+                                        }} />
+                                    </div>
+                                    <div>
+                                        <label className="text-sm font-bold mb-2" style={{display: 'block'}}>Place</label>
+                                        <input type="text" value={exp.place} onChange={(e) => {
+                                            const n = [...workExperience];
+                                            n[idx].place = e.target.value;
+                                            setWorkExperience(n);
+                                        }} />
+                                    </div>
+                                </div>
+                                <div style={{marginTop: '1.5rem'}}>
+                                    <label className="text-sm font-bold mb-2" style={{display: 'block'}}>Dates</label>
+                                    <input type="text" value={exp.dates} onChange={(e) => {
+                                        const n = [...workExperience];
+                                        n[idx].dates = e.target.value;
+                                        setWorkExperience(n);
+                                    }} />
+                                </div>
+                                <div style={{marginTop: '1.5rem'}}>
+                                    <label className="text-sm font-bold mb-2" style={{display: 'block'}}>Description</label>
+                                    <textarea rows={4} value={exp.description} onChange={(e) => {
+                                        const n = [...workExperience];
+                                        n[idx].description = e.target.value;
+                                        setWorkExperience(n);
+                                    }} />
+                                </div>
+                            </div>
+                        ))}
+                        <button onClick={() => setWorkExperience([...workExperience, { role: '', place: '', dates: '', description: '' }])} className="btn btn-outline w-full justify-center">
+                            <Plus className="w-5 h-5" />Add Work Experience
+                        </button>
+                    </div>
+                ),
+                5: (
+                    <div className="space-y-8">
+                        <div className="info-box bg-green-50 border-green-500">
+                            <p className="text-green-900 font-medium">🤝 Volunteer experience</p>
+                        </div>
+                        {volunteerExperience.map((exp, idx) => (
+                            <div key={idx} className="card relative">
+                                {volunteerExperience.length > 1 && (
+                                    <button onClick={() => setVolunteerExperience(volunteerExperience.filter((_, i) => i !== idx))} className="btn btn-delete absolute top-4 right-4">
+                                        <Trash2 className="w-5 h-5" />
+                                    </button>
+                                )}
+                                <h4 className="font-bold mb-4">Volunteer #{idx + 1}</h4>
+                                <div className="grid grid-cols-2 gap-6">
+                                    <div>
+                                        <label className="text-sm font-bold mb-2" style={{display: 'block'}}>Role</label>
+                                        <input type="text" value={exp.role} onChange={(e) => {
+                                            const n = [...volunteerExperience];
+                                            n[idx].role = e.target.value;
+                                            setVolunteerExperience(n);
+                                        }} />
+                                    </div>
+                                    <div>
+                                        <label className="text-sm font-bold mb-2" style={{display: 'block'}}>Organization</label>
+                                        <input type="text" value={exp.place} onChange={(e) => {
+                                            const n = [...volunteerExperience];
+                                            n[idx].place = e.target.value;
+                                            setVolunteerExperience(n);
+                                        }} />
+                                    </div>
+                                </div>
+                                <div style={{marginTop: '1.5rem'}}>
+                                    <label className="text-sm font-bold mb-2" style={{display: 'block'}}>Dates</label>
+                                    <input type="text" value={exp.dates} onChange={(e) => {
+                                        const n = [...volunteerExperience];
+                                        n[idx].dates = e.target.value;
+                                        setVolunteerExperience(n);
+                                    }} />
+                                </div>
+                                <div style={{marginTop: '1.5rem'}}>
+                                    <label className="text-sm font-bold mb-2" style={{display: 'block'}}>Description</label>
+                                    <textarea rows={4} value={exp.description} onChange={(e) => {
+                                        const n = [...volunteerExperience];
+                                        n[idx].description = e.target.value;
+                                        setVolunteerExperience(n);
+                                    }} />
+                                </div>
+                            </div>
+                        ))}
+                        <button onClick={() => setVolunteerExperience([...volunteerExperience, { role: '', place: '', dates: '', description: '' }])} className="btn btn-outline w-full justify-center">
+                            <Plus className="w-5 h-5" />Add Volunteer
+                        </button>
+                    </div>
+                ),
+                6: (
+                    <div className="space-y-8">
+                        <div className="info-box bg-blue-50 border-blue-500">
+                            <p className="text-blue-900 font-medium">📚 College projects</p>
+                        </div>
+                        {projects.map((proj, idx) => (
+                            <div key={idx} className="card relative">
+                                {projects.length > 1 && (
+                                    <button onClick={() => setProjects(projects.filter((_, i) => i !== idx))} className="btn btn-delete absolute top-4 right-4">
+                                        <Trash2 className="w-5 h-5" />
+                                    </button>
+                                )}
+                                <h4 className="font-bold mb-4">Project #{idx + 1}</h4>
+                                <div className="grid grid-cols-2 gap-6">
+                                    <div>
+                                        <label className="text-sm font-bold mb-2" style={{display: 'block'}}>Title</label>
+                                        <input type="text" value={proj.title} onChange={(e) => {
+                                            const n = [...projects];
+                                            n[idx].title = e.target.value;
+                                            setProjects(n);
+                                        }} />
+                                    </div>
+                                    <div>
+                                        <label className="text-sm font-bold mb-2" style={{display: 'block'}}>Course</label>
+                                        <input type="text" value={proj.course} onChange={(e) => {
+                                            const n = [...projects];
+                                            n[idx].course = e.target.value;
+                                            setProjects(n);
+                                        }} />
+                                    </div>
+                                </div>
+                                <div style={{marginTop: '1.5rem'}}>
+                                    <label className="text-sm font-bold mb-2" style={{display: 'block'}}>Description</label>
+                                    <textarea rows={4} value={proj.description} onChange={(e) => {
+                                        const n = [...projects];
+                                        n[idx].description = e.target.value;
+                                        setProjects(n);
+                                    }} />
+                                </div>
+                            </div>
+                        ))}
+                        <button onClick={() => setProjects([...projects, { title: '', course: '', description: '' }])} className="btn btn-outline w-full justify-center">
+                            <Plus className="w-5 h-5" />Add Project
+                        </button>
+                    </div>
+                ),
+                7: (
+                    <div className="space-y-8">
+                        <div className="info-box bg-purple-50 border-purple-500">
+                            <p className="text-purple-900 font-medium">🏅 Achievements</p>
+                        </div>
+                        <div className="space-y-4">
+                            {achievements.map((ach, idx) => (
+                                <div key={idx} className="flex gap-3">
+                                    <input type="text" placeholder="High Attendance Award" value={ach} onChange={(e) => {
+                                        const n = [...achievements];
+                                        n[idx] = e.target.value;
+                                        setAchievements(n);
+                                    }} />
+                                    {idx === achievements.length - 1 && (
+                                        <button onClick={() => setAchievements([...achievements, ''])} className="btn btn-purple">
+                                            <Plus className="w-5 h-5" />
+                                        </button>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ),
+                8: (
+                    <div className="space-y-8">
+                        <div className="info-box bg-green-50 border-green-500">
+                            <p className="text-green-900 font-medium">🌍 Languages</p>
+                        </div>
+                        <div className="card space-y-6">
+                            <div>
+                                <label className="text-sm font-bold mb-2" style={{display: 'block'}}>Native Language</label>
+                                <input type="text" value={nativeLanguage} onChange={(e) => setNativeLanguage(e.target.value)} />
+                            </div>
+                            <div>
+                                <label className="text-sm font-bold mb-2" style={{display: 'block'}}>English Level</label>
+                                <select value={englishLevel} onChange={(e) => setEnglishLevel(e.target.value)}>
+                                    <option>A2</option>
+                                    <option>A2+</option>
+                                    <option>B1</option>
+                                    <option>B1+</option>
+                                    <option>B2</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className="text-sm font-bold mb-2" style={{display: 'block'}}>Other Languages</label>
+                                <input type="text" placeholder="French (Basic)" value={otherLanguages} onChange={(e) => setOtherLanguages(e.target.value)} />
+                            </div>
+                        </div>
+                    </div>
+                ),
+                9: (
+                    <div className="space-y-8">
+                        <div className="info-box bg-blue-50 border-blue-500">
+                            <p className="text-blue-900 font-medium">❤️ Hobbies</p>
+                        </div>
+                        <div className="card">
+                            <div className="grid grid-cols-2 gap-4">
+                                {['Football', 'Gym', 'Gaming', 'Movies', 'Photography', 'Technology', 'Travel', 'Reading', 'Cooking', 'Music'].map(hobby => (
+                                    <label key={hobby} style={{display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem', background: '#f8fafc', borderRadius: '0.5rem', cursor: 'pointer'}}>
+                                        <input type="checkbox" checked={hobbies.includes(hobby)} onChange={() => {
+                                            if (hobbies.includes(hobby)) setHobbies(hobbies.filter(h => h !== hobby));
+                                            else setHobbies([...hobbies, hobby]);
+                                        }} />
+                                        <span>{hobby}</span>
+                                    </label>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                ),
+                10: (
+                    <div className="space-y-8">
+                        <div className="info-box bg-purple-50 border-purple-500">
+                            <p className="text-purple-900 font-medium">⚡ Key strengths</p>
+                        </div>
+                        <div className="card">
+                            <div className="grid grid-cols-2 gap-4">
+                                {['I am punctual', 'I work in teams', 'I am polite', 'I like to learn', 'I stay calm', 'I prepare well', 'I am organized', 'I am reliable'].map(strength => (
+                                    <label key={strength} style={{display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem', background: '#f8fafc', borderRadius: '0.5rem', cursor: 'pointer'}}>
+                                        <input type="checkbox" checked={strengths.includes(strength)} onChange={() => {
+                                            if (strengths.includes(strength)) setStrengths(strengths.filter(s => s !== strength));
+                                            else setStrengths([...strengths, strength]);
+                                        }} />
+                                        <span>{strength}</span>
+                                    </label>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                ),
                 11: (
                     <div className="space-y-8">
                         <div className="success-box">
@@ -477,7 +756,12 @@
                             <div className="space-y-4">
                                 <p><strong>Name:</strong> {firstName} {lastName}</p>
                                 <p><strong>Contact:</strong> {email} | {phone}</p>
-                                <p><strong>Objective:</strong> {objective}</p>
+                                <p><strong>City:</strong> {city}</p>
+                                {objective && <p><strong>Objective:</strong> {objective}</p>}
+                                <p><strong>Education:</strong> {education.length} entries</p>
+                                <p><strong>Skills:</strong> {technicalSkills.length + softSkills.length} selected</p>
+                                <p><strong>Work:</strong> {workExperience.length} entries</p>
+                                <p><strong>Projects:</strong> {projects.length} entries</p>
                             </div>
                         </div>
                         <div className="flex gap-4">
